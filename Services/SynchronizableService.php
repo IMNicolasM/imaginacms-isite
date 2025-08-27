@@ -144,7 +144,9 @@ class SynchronizableService
       $formattedParams["dependencies"] = $entityToSync["dependencies"];;
     }
 
-    $response = $this->sendRequestToN8N($formattedParams, $currentModel, '/export/v2');
+    $syncVersion = config("asgard.isite.config.syncVersion");
+
+    $response = $this->sendRequestToN8N($formattedParams, $currentModel, "/$syncVersion/export");
 
     // Returning the response data
     return ['data' => $response];
@@ -170,7 +172,9 @@ class SynchronizableService
       'apiRoute' => $entityToSync["apiRoute"]
     ];
 
-    $response = $this->sendRequestToN8N($formattedParams, $currentModel, '/import');
+    $syncVersion = config("asgard.isite.config.syncVersion");
+
+    $response = $this->sendRequestToN8N($formattedParams, $currentModel, "/$syncVersion/import");
 
     // Returning the response data
     return ['data' => $response];
